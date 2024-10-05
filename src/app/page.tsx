@@ -1,7 +1,9 @@
 "use client";
 
 import React from 'react';
-import { Heading, Text, Flex, Button, Grid, Background } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Background, Icon, Navbar } from '@/once-ui/components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css'; // Import Swiper styles
 
 export default function Pricing() {
   const pricingPlans = [
@@ -36,56 +38,87 @@ export default function Pricing() {
 
   return (
     <Flex
-      fillWidth paddingTop="l" paddingX="l"
-      direction="column" alignItems="center" flex={1}>
+      fillWidth direction="column" alignItems="center" flex={1}>
+      
+      {/* Navbar */}
+      <Navbar>
+        <Flex fillWidth justifyContent="space-between" padding="l">
+          <Heading variant="display-strong-m" color="primary">My App</Heading>
+          <Flex gap="l">
+            <Button href="#home" variant="tertiary">Home</Button>
+            <Button href="#pricing" variant="tertiary">Pricing</Button>
+            <Button href="#contact" variant="tertiary">Contact</Button>
+          </Flex>
+        </Flex>
+      </Navbar>
+
+      {/* Background */}
       <Background dots={false}/>
+
+      {/* Pricing Section */}
       <Flex
-        position="relative"
-        as="section" overflow="hidden"
-        fillWidth minHeight="0" maxWidth={68}
+        as="section" id="pricing"
+        fillWidth paddingTop="l" paddingX="l"
         direction="column" alignItems="center" flex={1}>
+        
         <Heading
           variant="display-strong-m"
           color="primary">
           Our Pricing Plans
         </Heading>
-        <Grid
-          radius="l"
-          border="neutral-medium"
-          borderStyle="solid-1"
-          columns="repeat(3, 1fr)"
-          tabletColumns="1col"
-          mobileColumns="1col"
-          fillWidth gap="l"
-          paddingY="l">
+
+        {/* Slider */}
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+        >
           {pricingPlans.map((plan, index) => (
-            <Flex
-              key={index}
-              direction="column"
-              alignItems="center"
-              padding="l"
-              border="neutral-weak"
-              borderStyle="solid-1"
-              radius="l">
-              <Heading variant="display-strong-s" color="textPrimary">
-                {plan.name}
-              </Heading>
-              <Text variant="display-strong-l" color="textPrimary">
-                {plan.price}
-              </Text>
-              <Flex direction="column" gap="s" alignItems="center">
-                {plan.features.map((feature, idx) => (
-                  <Text key={idx} variant="body-default-s" color="textSecondary">
-                    {feature}
-                  </Text>
-                ))}
+            <SwiperSlide key={index}>
+              <Flex
+                direction="column"
+                alignItems="center"
+                padding="l"
+                border="neutral-weak"
+                borderStyle="solid-1"
+                radius="l"
+                style={{
+                  backdropFilter: 'blur(10px)', // Blur effect
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent white background
+                  padding: '2rem',
+                  borderRadius: '1rem',
+                }}>
+                <Heading variant="display-strong-s" color="textPrimary">
+                  {plan.name}
+                </Heading>
+                <Text variant="display-strong-l" color="textPrimary">
+                  {plan.price}
+                </Text>
+                <Flex direction="column" gap="s" alignItems="center">
+                  {plan.features.map((feature, idx) => (
+                    <Text key={idx} variant="body-default-s" color="textSecondary">
+                      {feature}
+                    </Text>
+                  ))}
+                </Flex>
+                <Button variant="primary" color="primary">
+                  Choose {plan.name}
+                </Button>
               </Flex>
-              <Button variant="primary" color="primary">
-                Choose {plan.name}
-              </Button>
-            </Flex>
+            </SwiperSlide>
           ))}
-        </Grid>
+        </Swiper>
       </Flex>
     </Flex>
   );
