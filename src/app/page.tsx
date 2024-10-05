@@ -67,7 +67,7 @@ export default function Pricing() {
               border="neutral-weak"
               borderStyle="solid-1"
               radius="l">
-              <Heading variant="title-strong-s" color="textPrimary">
+              <Heading variant="display-strong-s" color="textPrimary">
                 {plan.name}
               </Heading>
               <Text variant="display-strong-l" color="textPrimary">
