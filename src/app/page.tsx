@@ -1,11 +1,9 @@
 "use client";
 
 import React from 'react';
-import { Heading, Text, Flex, Button, Grid, Background, useTheme } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Background } from '@/once-ui/components';
 
 export default function Pricing() {
-  const { theme } = useTheme();
-
   const pricingPlans = [
     {
       name: "Free",
@@ -38,7 +36,7 @@ export default function Pricing() {
 
   return (
     <Flex
-      fillWidth paddingTop={theme.spacing.l} paddingX={theme.spacing.l}
+      fillWidth paddingTop="l" paddingX="l"
       direction="column" alignItems="center" flex={1}>
       <Background dots={false}/>
       <Flex
@@ -48,41 +46,41 @@ export default function Pricing() {
         direction="column" alignItems="center" flex={1}>
         <Heading
           variant="display-strong-m"
-          color={theme.colors.primary}>
+          color="primary">
           Our Pricing Plans
         </Heading>
         <Grid
-          radius={theme.radii.l}
-          border={theme.borders.neutralMedium}
+          radius="l"
+          border="neutral-medium"
           borderStyle="solid-1"
           columns="repeat(3, 1fr)"
           tabletColumns="1col"
           mobileColumns="1col"
-          fillWidth gap={theme.spacing.l}
-          paddingY={theme.spacing.l}>
+          fillWidth gap="l"
+          paddingY="l">
           {pricingPlans.map((plan, index) => (
             <Flex
               key={index}
               direction="column"
               alignItems="center"
-              padding={theme.spacing.l}
-              border={theme.borders.neutralWeak}
+              padding="l"
+              border="neutral-weak"
               borderStyle="solid-1"
-              radius={theme.radii.l}>
-              <Heading variant="title-strong-s" color={theme.colors.textPrimary}>
+              radius="l">
+              <Heading variant="title-strong-s" color="textPrimary">
                 {plan.name}
               </Heading>
-              <Text variant="display-strong-l" color={theme.colors.textPrimary}>
+              <Text variant="display-strong-l" color="textPrimary">
                 {plan.price}
               </Text>
-              <Flex direction="column" gap={theme.spacing.s} alignItems="center">
+              <Flex direction="column" gap="s" alignItems="center">
                 {plan.features.map((feature, idx) => (
-                  <Text key={idx} variant="body-default-s" color={theme.colors.textSecondary}>
+                  <Text key={idx} variant="body-default-s" color="textSecondary">
                     {feature}
                   </Text>
                 ))}
               </Flex>
-              <Button variant="primary" color={theme.colors.primary}>
+              <Button variant="primary" color="primary">
                 Choose {plan.name}
               </Button>
             </Flex>
